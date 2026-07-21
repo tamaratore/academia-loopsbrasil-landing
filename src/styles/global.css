@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+.balance {
+  text-wrap: balance;
+}
+
+/* equalizador simples do hero, CSS puro, sempre visível, sem depender de scroll/JS */
+.eq-bar {
+  height: 40%;
+  transform-origin: bottom;
+  animation: eq-bounce 1.1s ease-in-out infinite;
+}
+.eq-bar:nth-child(1) { animation-delay: -1.1s; height: 55%; }
+.eq-bar:nth-child(2) { animation-delay: -0.7s; height: 30%; }
+.eq-bar:nth-child(3) { animation-delay: -0.9s; height: 70%; }
+.eq-bar:nth-child(4) { animation-delay: -0.3s; height: 100%; }
+.eq-bar:nth-child(5) { animation-delay: -0.5s; height: 45%; }
+.eq-bar:nth-child(6) { animation-delay: -1s; height: 65%; }
+.eq-bar:nth-child(7) { animation-delay: -0.2s; height: 35%; }
+
+@keyframes eq-bounce {
+  0%, 100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .eq-bar {
+    animation: none;
+    transform: scaleY(0.7);
+  }
+}
+
+/* brilho de borda com a cor da assinatura (laranja) ao passar o mouse nos cards:
+   só cor, sem mover/escalar nada (nunca usar tração/scale no hover) */
+.glow-card {
+  position: relative;
+}
+.glow-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(135deg, #ff6a00, #da5601);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.glow-card:hover::before {
+  opacity: 1;
+}
+
+/* facade de vídeo: thumbnail clicável que vira iframe do YouTube só quando
+   clicado, pra não carregar o player inteiro sem necessidade (performance/SEO) */
+.video-play-btn {
+  transition: transform 0.2s ease;
+}
+.video-facade:hover .video-play-btn {
+  transform: scale(1.08);
+}

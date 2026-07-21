@@ -1,0 +1,42 @@
+---
+interface Brand {
+  nome: string;
+  href: string;
+  logo: string;
+  logoW: number;
+  logoH: number;
+  heightClass: string;
+}
+
+interface Props {
+  atual: string;
+}
+
+const { atual } = Astro.props;
+
+const REDE: Brand[] = [
+  { nome: 'Rede Loops Brasil', href: 'https://loopsbrasil.com.br', logo: '/images/loopsbrasil-logo.png', logoW: 746, logoH: 371, heightClass: 'h-9' },
+  { nome: 'ED Tutoriais', href: 'https://edtutoriais.com.br', logo: '/images/edtutoriais-logo.png', logoW: 80, logoH: 38, heightClass: 'h-7' },
+  { nome: 'Samples Brasil', href: 'https://samplesbrasil.com', logo: '/images/samplesbrasil-logo.png', logoW: 200, logoH: 43, heightClass: 'h-6' },
+  { nome: 'EM Music Produções', href: 'https://emmusicproducoes.com.br', logo: '/images/em-music-logo.png', logoW: 578, logoH: 240, heightClass: 'h-8' },
+  { nome: 'EDTMusic', href: 'https://edtmusic.com.br', logo: '/images/edtmusic-logo.png', logoW: 753, logoH: 160, heightClass: 'h-6' },
+];
+---
+
+<div class="w-full border-t border-ink-line pt-8">
+  <p class="text-center text-xs uppercase tracking-[0.2em] text-paper/40">Parte da Rede Loops Brasil</p>
+  <div class="mt-5 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+    {REDE.filter((b) => b.nome !== atual).map((b) => (
+      <a href={b.href} target="_blank" rel="noopener noreferrer" aria-label={b.nome}>
+        <img
+          src={b.logo}
+          alt={b.nome}
+          class={`${b.heightClass} w-auto opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0`}
+          width={b.logoW}
+          height={b.logoH}
+          loading="lazy"
+        />
+      </a>
+    ))}
+  </div>
+</div>
