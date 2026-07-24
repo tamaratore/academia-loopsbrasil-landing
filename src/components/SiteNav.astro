@@ -1,0 +1,33 @@
+---
+// Toré pediu (24/07): mesmo esquema de menu do emmusicproducoes (logo + links
+// de secao). Sem redes sociais aqui - a Academia ainda nao tem conta propria
+// confirmada (marca nova, sem logo/redes ainda). Sem CTA - pagina "em breve",
+// nao vende nada direto (quem vende sao os cursos individuais).
+// "Sobre" ja existe na barra de cima (RedeSwitcher, link externo pra Nossa
+// Historia da rede) - usar outro nome aqui pra nao ter 2 "Sobre" diferentes
+// (um ancora local, outro link externo) empilhados um do lado do outro.
+const LINKS = [
+  { href: '#topo', label: 'Início' },
+  { href: '#sobre', label: 'O que é a ALB' },
+  { href: '#cursos', label: 'Cursos' },
+];
+---
+<div id="site-nav" class="hidden sm:block">
+  <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
+    <a href="#topo" class="flex shrink-0 items-center gap-2">
+      <span class="font-hero text-sm uppercase tracking-[0.15em] text-brand-red">ALB</span>
+      <span class="font-accent text-sm uppercase tracking-wide text-paper">Academia Loops Brasil</span>
+    </a>
+
+    <nav class="hidden items-center gap-6 md:flex">
+      {LINKS.map((l) => (
+        <a
+          href={l.href}
+          class="font-accent text-sm uppercase tracking-[0.15em] text-paper transition hover:text-brand-red"
+        >
+          {l.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</div>

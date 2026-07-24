@@ -78,7 +78,10 @@ const ogImage = image ? new URL(image, Astro.site).toString() : undefined;
       {academiaMode ? (
         <CourseNav cursoAtualSlug={cursoAtualSlug} />
       ) : (
-        redeAtual && <RedeSwitcher atual={redeAtual} />
+        <>
+          {redeAtual && <RedeSwitcher atual={redeAtual} />}
+          <slot name="nav" />
+        </>
       )}
     </div>
     {redeAtual && <SideTabs siteLabel={redeAtual} />}
