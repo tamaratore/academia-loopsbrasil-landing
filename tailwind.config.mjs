@@ -23,8 +23,10 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Anton"', 'sans-serif'],
-        body: ['"Work Sans"', 'sans-serif'],
+        hero: ['"Anton"', 'sans-serif'],
+        display: ['"Poppins"', 'sans-serif'],
+        body: ['"Lato"', 'sans-serif'],
+        accent: ['"Abel"', 'sans-serif'],
       },
     },
   },
