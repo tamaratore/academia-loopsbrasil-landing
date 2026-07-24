@@ -1,7 +1,8 @@
 ---
 // nav especifico das paginas de curso: em vez do seletor "Rede Loops Brasil",
-// mostra a logo real da Academia (recebida 24/07, era placeholder EDT antes)
-// e um trocador entre os cursos.
+// mostra "ALB" em texto (logo em imagem tentada 24/07 mas o arquivo fonte
+// tinha defeitos reais dificeis de corrigir - Tore pediu texto na fonte da
+// marca em vez de continuar brigando com a imagem) e um trocador de curso.
 import { cursos } from '../data/cursos';
 
 interface Props {
@@ -13,7 +14,7 @@ const { cursoAtualSlug } = Astro.props;
 <header>
   <div class="flex flex-row items-center justify-between gap-2 px-4 py-2.5 sm:px-6">
     <a href="/" class="flex items-center gap-2.5 text-paper/80 transition hover:text-paper">
-      <img src="/images/alb-logo.png" alt="Academia Loops Brasil" class="h-6 w-auto shrink-0" width="1450" height="638" />
+      <span class="font-hero text-base uppercase tracking-[0.1em] text-paper">ALB</span>
     </a>
     <nav class="flex items-center gap-4">
       <a href="/" class="hidden text-xs font-semibold text-paper/70 transition hover:text-paper sm:inline">
