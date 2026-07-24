@@ -70,9 +70,9 @@ const ogImage = image ? new URL(image, Astro.site).toString() : undefined;
   </head>
   <body class="bg-black text-paper font-body antialiased">
     {academiaMode ? (
-      <Preloader logo="/images/edtutoriais-logo.png" logoAlt="ED Tutoriais" />
+      <Preloader logo="/images/alb-logo.png" logoAlt="Academia Loops Brasil" />
     ) : (
-      <Preloader />
+      <Preloader logo="/images/alb-logo.png" logoAlt="Academia Loops Brasil" />
     )}
     <div id="site-nav-wrap" class="nav-overlay-gradient fixed inset-x-0 top-0 z-50">
       {academiaMode ? (
