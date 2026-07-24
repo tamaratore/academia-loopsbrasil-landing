@@ -1,0 +1,63 @@
+---
+// nav especifico das paginas de curso: em vez do seletor "Rede Loops Brasil",
+// mostra "ACADEMIA" + logo EDT (Toré, 23/07: "coloca pra carregar o curso com a
+// logo EDT DEPOIS VOU TE DAR A LOGO DA ACADEMIA") e um trocador entre os cursos.
+import { cursos } from '../data/cursos';
+
+interface Props {
+  cursoAtualSlug?: string;
+}
+const { cursoAtualSlug } = Astro.props;
+---
+
+<header>
+  <div class="flex flex-col items-center gap-2 px-4 py-3 sm:flex-row sm:justify-between sm:gap-0 sm:py-2.5 sm:px-6">
+    <a href="/" class="flex items-center gap-2.5 text-paper/80 transition hover:text-paper">
+      <img src="/images/edtutoriais-logo.png" alt="ED Tutoriais" class="h-6 w-auto shrink-0" />
+      <span class="flex flex-col text-[10px] font-semibold uppercase leading-[1.15] tracking-[0.2em]">
+        <span class="text-brand-red">Academia</span>
+        <span>Loops Brasil</span>
+      </span>
+    </a>
+    <nav class="flex items-center gap-4">
+      <a href="/" class="hidden text-xs font-semibold text-paper/70 transition hover:text-paper sm:inline">
+        Todos os cursos
+      </a>
+      <details class="rede-switcher relative">
+        <summary class="flex cursor-pointer list-none items-center gap-1.5 rounded-full border border-ink-line px-3 py-1.5 text-xs font-semibold text-paper/80 transition hover:border-paper/40 hover:text-paper">
+          Trocar de curso
+          <svg viewBox="0 0 24 24" class="h-3 w-3 fill-current"><path d="M7 10l5 5 5-5z"></path></svg>
+        </summary>
+        <div class="absolute right-0 z-50 mt-2 max-h-[70vh] w-72 max-w-[calc(100vw-2rem)] overflow-y-auto rounded-2xl border border-ink-line bg-ink-raised p-2 shadow-xl">
+          {cursos.map((c) => (
+            c.slug === cursoAtualSlug ? (
+              <div class="block rounded-xl bg-ink px-3 py-2.5">
+                <p class="text-sm font-semibold text-paper">
+                  {c.titulo}
+                  <span class="ml-1.5 text-[10px] font-normal uppercase tracking-wide text-paper/40">você está aqui</span>
+                </p>
+                <p class="mt-0.5 text-xs text-paper/50">{c.preco}</p>
+              </div>
+            ) : (
+              <a href={`/${c.slug}`} class="block rounded-xl px-3 py-2.5 transition hover:bg-ink">
+                <p class="text-sm font-semibold text-paper">{c.titulo}</p>
+                <p class="mt-0.5 text-xs text-paper/50">{c.preco}</p>
+              </a>
+            )
+          ))}
+        </div>
+      </details>
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.querySelectorAll('.rede-switcher').forEach((el) => {
+    document.addEventListener('click', (e) => {
+      if (!el.contains(e.target as Node)) el.removeAttribute('open');
+    });
+    el.addEventListener('keydown', (e) => {
+      if ((e as KeyboardEvent).key === 'Escape') el.removeAttribute('open');
+    });
+  });
+</script>

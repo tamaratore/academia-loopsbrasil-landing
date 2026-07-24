@@ -1,78 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import RedeFooter from '../components/RedeFooter.astro';
-
-// cursos reais extraídos de edtutoriais.com.br/cursos/ em 21/07 (mesmo catálogo,
-// nenhum dado inventado). Quando a Academia integrar o checkout próprio, esses
-// links passam a apontar pra cá em vez de pro edtutoriais.
-const cursos = [
-  {
-    titulo: 'Curso Kontakt 8 Pro',
-    desc: 'Do zero ao profissional com o Kontakt 8. Arranjos realistas, timbres poderosos e total domínio da ferramenta.',
-    preco: 'R$497',
-    parcela: 'ou 12x de R$41,42',
-    href: 'https://edtutoriais.com.br/k8/',
-    badge: 'Mais popular',
-  },
-  {
-    titulo: 'Produzindo do Zero',
-    desc: 'Monte uma produção musical completa do zero usando loops e ferramentas dos produtores de Forró, Piseiro e Sertanejo.',
-    preco: 'R$197',
-    parcela: 'ou 12x de R$20,37',
-    href: 'https://edtutoriais.com.br/cursoproduzindo-dozero/',
-  },
-  {
-    titulo: 'Contakt Prático 6',
-    desc: 'Aprenda a usar o Kontakt 6 na prática. Do básico ao avançado, aplicado direto na produção musical.',
-    preco: 'R$87',
-    parcela: 'ou 12x de R$9,00',
-    href: 'https://edtutoriais.com.br/curso-kontakt-6/',
-  },
-  {
-    titulo: 'Mixagem e Masterização',
-    desc: 'Técnicas reais de mixagem e masterização para fazer sua música soar profissional.',
-    preco: 'R$197',
-    parcela: 'ou 12x de R$20,37',
-    href: 'https://edtutoriais.com.br/cursomixagememasterizacao/',
-  },
-  {
-    titulo: 'Guias Sertanejo',
-    desc: 'Aprenda a criar os guias melódicos e arranjos harmônicos que definem o som do Sertanejo atual.',
-    preco: 'R$197',
-    parcela: 'ou 12x de R$20,37',
-    href: 'https://edtutoriais.com.br/curso-guias/',
-  },
-  {
-    titulo: 'Curso Loops',
-    desc: 'Aprenda a usar, editar e combinar loops profissionais para criar arranjos com som de estúdio.',
-    preco: 'R$67',
-    parcela: 'ou 12x de R$6,93',
-    href: 'https://edtutoriais.com.br/cursoloops/',
-  },
-  {
-    titulo: 'Cakewalk DAW Gratuita',
-    desc: 'Produza músicas profissionais usando o Cakewalk by BandLab, a DAW mais completa e totalmente gratuita.',
-    preco: 'R$47',
-    parcela: 'ou 11x de R$5,22',
-    href: 'https://edtutoriais.com.br/curso-cakewalk/',
-  },
-  {
-    titulo: 'Jornada do Sucesso',
-    desc: 'Pacote completo com todos os principais cursos da ED Tutoriais. Do zero ao profissional em um só acesso.',
-    preco: 'R$397',
-    parcela: 'ou 12x de R$41,06',
-    href: 'https://edtutoriais.com.br/curso-jornada-sucesso/',
-    badge: 'Melhor custo-benefício',
-  },
-  {
-    titulo: 'Série em Vídeo: Grave Fácil',
-    desc: 'Aprenda a gravar do jeito certo com resultado profissional. Série em vídeo 100% gratuita do Eder Machado.',
-    preco: 'Grátis',
-    parcela: null,
-    href: 'https://edtutoriais.com.br/curso-grave-facil/',
-    badge: 'Gratuito',
-  },
-];
+import { cursos } from '../data/cursos';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -119,16 +48,14 @@ const structuredData = {
     <div class="mx-auto mt-16 w-full max-w-5xl px-4 sm:px-0">
       <h2 class="text-center font-display text-2xl text-paper sm:text-3xl">Os cursos de hoje</h2>
       <p class="mx-auto mt-3 max-w-lg text-center text-sm text-paper/60">
-        Por enquanto, esses são os cursos da ED Tutoriais. Em breve eles vão
-        estar integrados aqui, direto pela Academia Loops Brasil.
+        Esses são os cursos da ED Tutoriais, já com página própria e vídeo aqui
+        na Academia Loops Brasil.
       </p>
 
       <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {cursos.map((c) => (
           <a
-            href={c.href}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`/${c.slug}`}
             class="glow-card flex flex-col rounded-2xl bg-ink-raised p-5 transition"
           >
             {c.badge && (

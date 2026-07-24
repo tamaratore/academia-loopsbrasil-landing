@@ -1,6 +1,19 @@
-<!-- mesmo padrao do preloader do edtutoriais/emmusicproducoes/loopsbrasil-landing -->
+---
+// mesmo padrao do preloader do edtutoriais/emmusicproducoes/loopsbrasil-landing.
+// Nas paginas de curso, Toré pediu (23/07) pra carregar com a logo EDT em vez do
+// texto ALB, ate ela mandar a logo definitiva da Academia.
+interface Props {
+  logo?: string;
+  logoAlt?: string;
+}
+const { logo, logoAlt } = Astro.props;
+---
 <div id="el-preloader">
-  <p id="el-preloader-text">ALB</p>
+  {logo ? (
+    <img src={logo} alt={logoAlt || ''} id="el-preloader-logo" />
+  ) : (
+    <p id="el-preloader-text">ALB</p>
+  )}
   <div id="el-preloader-eq" aria-hidden="true">
     <span class="eq-bar"></span>
     <span class="eq-bar"></span>
@@ -29,6 +42,11 @@
     font-size: 28px;
     letter-spacing: 0.1em;
     color: #f7f4ee;
+    animation: el-pulse 1.6s ease-in-out infinite;
+  }
+  #el-preloader-logo {
+    height: 40px;
+    width: auto;
     animation: el-pulse 1.6s ease-in-out infinite;
   }
   #el-preloader-eq {
@@ -65,6 +83,7 @@
   @media (prefers-reduced-motion: reduce) {
     #el-preloader-eq .eq-bar { animation: none; transform: scaleY(0.7); }
     #el-preloader-text { animation: none; }
+    #el-preloader-logo { animation: none; }
   }
   #el-preloader.is-hidden {
     opacity: 0;

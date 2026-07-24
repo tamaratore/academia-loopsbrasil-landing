@@ -1,8 +1,15 @@
 ---
 import '../styles/global.css';
 import RedeSwitcher from '../components/RedeSwitcher.astro';
+import CourseNav from '../components/CourseNav.astro';
 import Preloader from '../components/Preloader.astro';
 import SideTabs from '../components/SideTabs.astro';
+
+// GA4 da Academia ainda nao existe como propriedade propria (as 5 propriedades
+// confirmadas em 21/07 sao edtutoriais/loopsbrasil.com.br/edtmusic/eder/proeder,
+// ver memoria project_analytics_tracking_setup_20_07) - assim que Toré criar e
+// passar o Measurement ID (G-XXXXXXX), colocar aqui.
+const GA4_MEASUREMENT_ID = '';
 
 interface Props {
   title: string;
@@ -10,8 +17,10 @@ interface Props {
   image?: string;
   structuredData?: Record<string, unknown>;
   redeAtual?: string;
+  academiaMode?: boolean;
+  cursoAtualSlug?: string;
 }
-const { title, description, image, structuredData, redeAtual } = Astro.props;
+const { title, description, image, structuredData, redeAtual, academiaMode, cursoAtualSlug } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = image ? new URL(image, Astro.site).toString() : undefined;
 ---
@@ -46,11 +55,31 @@ const ogImage = image ? new URL(image, Astro.site).toString() : undefined;
       href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500;600;700;800&family=Lato:wght@400;700&family=Abel&display=swap"
       rel="stylesheet"
     />
+
+    {GA4_MEASUREMENT_ID && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`}></script>
+        <script define:vars={{ GA4_MEASUREMENT_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', GA4_MEASUREMENT_ID);
+        </script>
+      </>
+    )}
   </head>
   <body class="bg-black text-paper font-body antialiased">
-    <Preloader />
+    {academiaMode ? (
+      <Preloader logo="/images/edtutoriais-logo.png" logoAlt="ED Tutoriais" />
+    ) : (
+      <Preloader />
+    )}
     <div id="site-nav-wrap" class="nav-overlay-gradient fixed inset-x-0 top-0 z-50">
-      {redeAtual && <RedeSwitcher atual={redeAtual} />}
+      {academiaMode ? (
+        <CourseNav cursoAtualSlug={cursoAtualSlug} />
+      ) : (
+        redeAtual && <RedeSwitcher atual={redeAtual} />
+      )}
     </div>
     {redeAtual && <SideTabs siteLabel={redeAtual} />}
     <slot />
