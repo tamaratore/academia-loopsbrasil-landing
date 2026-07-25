@@ -88,15 +88,42 @@
 /* nav flutua por cima do conteudo, degrade transparente->escuro no topo, vira
    fundo solido (#100614, mesma cor das abas laterais) apos rolar */
 .nav-overlay-gradient {
-  /* sem video/imagem no hero desses sites, entao o degrade transparente
-     nao faz sentido (fica com "cara de sem fundo") - fica solido desde o
-     inicio, igual o resto da pagina depois de rolar */
-  background: #100614;
+  /* 25/07: hero ganhou video de fundo (Vimeo) - volta pro degrade
+     transparente sobre o video, igual emmusicproducoes/eder/edtmusic, so
+     fica solido depois de rolar */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.45) 65%, rgba(0, 0, 0, 0) 100%);
+  padding-bottom: 2.5rem;
+  margin-bottom: -2.5rem;
+  transition: background 0.3s ease;
 }
 .nav-overlay-gradient.nav-solid {
   background: #100614;
   padding-bottom: 0;
   margin-bottom: 0;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08), 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* video de fundo do hero via Vimeo (modo background=1, sem controles) */
+.hero-vimeo-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero-vimeo-iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw;
+  min-height: 100vh;
+  min-width: 177.78vh;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  filter: brightness(0.7) contrast(1.1) saturate(1.05);
+  border: none;
+  outline: none;
+  display: block;
 }
 
 /* cards de midia: sem borda, cantos quase retos, sombra leve parada + sombra
