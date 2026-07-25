@@ -63,7 +63,7 @@ const structuredData = {
 
     <div class="mx-auto mt-10 w-full max-w-2xl px-4 sm:px-0">
       <article class="glow-card rounded-2xl bg-ink-raised p-6 text-left sm:p-8">
-        <h2 class="font-display text-xl text-paper">Sobre o curso</h2>
+        <h2 class="font-hero text-xl text-paper">Sobre o curso</h2>
         <p class="mt-3 text-paper/70">{curso.descLonga}</p>
       </article>
     </div>
@@ -85,7 +85,7 @@ const structuredData = {
 
     {outrosCursos.length > 0 && (
       <div class="mx-auto mt-16 w-full max-w-5xl px-4 sm:px-0">
-        <h2 class="text-center font-display text-2xl text-paper sm:text-3xl">Outros cursos da Academia</h2>
+        <h2 class="text-center font-hero text-2xl text-paper sm:text-3xl">Outros cursos da Academia</h2>
         <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {outrosCursos.map((c) => (
             <a href={`/${c.slug}`} class="glow-card flex flex-col rounded-2xl bg-ink-raised p-5 text-left transition">

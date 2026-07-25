@@ -1,10 +1,7 @@
 // cursos reais extraídos de edtutoriais.com.br/cursos/ em 21/07 (mesmo catálogo,
-// nenhum dado inventado). videoId por enquanto reaproveita um vídeo real já usado
-// em outra landing page da rede (autorizado pela Toré em 23/07: "os videos use um
-// que vc ache legal para todos ja terem um video depois substituo"). Quando ela
-// mandar o vídeo específico de cada curso, trocar aqui.
-
-export const CURSO_VIDEO_PLACEHOLDER = 'omS3D-eyAW0';
+// nenhum dado inventado). videoId de cada curso extraído direto da própria
+// página do curso em edtutoriais.com.br (25/07) - vídeo real e específico de
+// cada um, confirmado por título via oembed do YouTube antes de usar.
 
 export interface Curso {
   slug: string;
@@ -29,7 +26,7 @@ export const cursos: Curso[] = [
     parcela: 'ou 12x de R$41,42',
     href: 'https://edtutoriais.com.br/k8/',
     badge: 'Mais popular',
-    videoId: CURSO_VIDEO_PLACEHOLDER,
+    videoId: 'VJ6Oj8880Ao',
   },
   {
     slug: 'produzindozero',
@@ -40,7 +37,7 @@ export const cursos: Curso[] = [
     preco: 'R$197',
     parcela: 'ou 12x de R$20,37',
     href: 'https://edtutoriais.com.br/cursoproduzindo-dozero/',
-    videoId: CURSO_VIDEO_PLACEHOLDER,
+    videoId: 'id0qdeMWhzc',
   },
   {
     slug: 'kontakt-6',
@@ -51,7 +48,7 @@ export const cursos: Curso[] = [
     preco: 'R$87',
     parcela: 'ou 12x de R$9,00',
     href: 'https://edtutoriais.com.br/curso-kontakt-6/',
-    videoId: CURSO_VIDEO_PLACEHOLDER,
+    videoId: 'RkY03E0QYtU',
   },
   {
     slug: 'mixagem-masterizacao',
@@ -62,7 +59,7 @@ export const cursos: Curso[] = [
     preco: 'R$197',
     parcela: 'ou 12x de R$20,37',
     href: 'https://edtutoriais.com.br/cursomixagememasterizacao/',
-    videoId: CURSO_VIDEO_PLACEHOLDER,
+    videoId: '2dJ9a1LNqdc',
   },
   {
     slug: 'guias-sertanejo',
@@ -73,7 +70,7 @@ export const cursos: Curso[] = [
     preco: 'R$197',
     parcela: 'ou 12x de R$20,37',
     href: 'https://edtutoriais.com.br/curso-guias/',
-    videoId: CURSO_VIDEO_PLACEHOLDER,
+    videoId: 'WDNl1jkKW0M',
   },
   {
     slug: 'curso-loops',
@@ -84,7 +81,7 @@ export const cursos: Curso[] = [
     preco: 'R$67',
     parcela: 'ou 12x de R$6,93',
     href: 'https://edtutoriais.com.br/cursoloops/',
-    videoId: CURSO_VIDEO_PLACEHOLDER,
+    videoId: 'xhXO5c-4-CI',
   },
   {
     slug: 'cakewalk',
@@ -95,7 +92,7 @@ export const cursos: Curso[] = [
     preco: 'R$47',
     parcela: 'ou 11x de R$5,22',
     href: 'https://edtutoriais.com.br/curso-cakewalk/',
-    videoId: CURSO_VIDEO_PLACEHOLDER,
+    videoId: 'JrdJPRD0pAY',
   },
   {
     slug: 'jornada-sucesso',
@@ -107,7 +104,7 @@ export const cursos: Curso[] = [
     parcela: 'ou 12x de R$41,06',
     href: 'https://edtutoriais.com.br/curso-jornada-sucesso/',
     badge: 'Melhor custo-benefício',
-    videoId: CURSO_VIDEO_PLACEHOLDER,
+    videoId: '5AtkCSm4An0',
   },
   {
     slug: 'grave-facil',
@@ -119,7 +116,7 @@ export const cursos: Curso[] = [
     parcela: null,
     href: 'https://edtutoriais.com.br/curso-grave-facil/',
     badge: 'Gratuito',
-    videoId: CURSO_VIDEO_PLACEHOLDER,
+    videoId: 'vGAlyd3KD_U',
   },
 ];
 

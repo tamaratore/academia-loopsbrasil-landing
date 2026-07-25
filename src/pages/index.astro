@@ -49,29 +49,16 @@ const heroVimeoEmbed = `https://player.vimeo.com/video/${HERO_VIMEO_ID}?backgrou
       <p class="balance mt-[5px] max-w-md font-display text-base leading-snug tracking-wide text-paper">
         Cursos de Produção Fonográfica para quem vive a música.
       </p>
+      <p class="balance mt-4 max-w-md text-sm text-paper/60">
+        Os cursos da ED Tutoriais passam a ficar dentro da Academia Loops
+        Brasil, e novos cursos estão a caminho. Fique de olho.
+      </p>
     </div>
   </section>
 
   <div class="flex flex-col items-center px-4 pb-16 sm:px-6">
-    <div id="sobre" class="mx-auto mt-16 w-full max-w-2xl px-4 sm:px-0">
-      <article class="glow-card rounded-2xl bg-ink-raised p-6 sm:p-8">
-        <p class="text-paper/70">
-          Em breve, a Rede Loops Brasil contará com a Academia Loops Brasil, também
-          apresentada pela sigla ALB. A nova frente educacional reunirá cursos
-          de produção fonográfica, produção musical, gravação, edição,
-          mixagem, instrumentos virtuais, tecnologia musical, audiovisual e
-          desenvolvimento de carreira.
-        </p>
-        <p class="mt-4 text-paper/70">
-          A Academia nasce da experiência construída pela ED Tutoriais desde
-          2010 e manterá o compromisso de oferecer conhecimento prático,
-          acessível e próximo da realidade de músicos, produtores e artistas.
-        </p>
-      </article>
-    </div>
-
     <div id="cursos" class="mx-auto mt-16 w-full max-w-5xl px-4 sm:px-0">
-      <h2 class="text-center font-display text-2xl text-paper sm:text-3xl">Os cursos de hoje</h2>
+      <h2 class="text-center font-hero text-2xl text-paper sm:text-3xl">Os cursos de hoje</h2>
       <p class="mx-auto mt-3 max-w-lg text-center text-sm text-paper/60">
         Esses são os cursos da ED Tutoriais, já com página própria e vídeo aqui
         na Academia Loops Brasil.
@@ -81,19 +68,29 @@ const heroVimeoEmbed = `https://player.vimeo.com/video/${HERO_VIMEO_ID}?backgrou
         {cursos.map((c) => (
           <a
             href={`/${c.slug}`}
-            class="glow-card flex flex-col rounded-2xl bg-ink-raised p-5 transition"
+            class="media-card group relative flex flex-col overflow-hidden bg-ink-raised"
           >
-            {c.badge && (
-              <span class="mb-2 inline-block w-fit rounded-full bg-brand-red/20 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-brand-red">
-                {c.badge}
+            <span class="relative block aspect-video w-full overflow-hidden">
+              <img
+                src={`https://img.youtube.com/vi/${c.videoId}/maxresdefault.jpg`}
+                alt={`Capa do curso ${c.titulo}`}
+                loading="lazy"
+                class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+              />
+              <span class="pointer-events-none absolute inset-0 bg-black/30" />
+              {c.badge && (
+                <span class="absolute left-3 top-3 inline-block rounded-full bg-brand-red px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
+                  {c.badge}
+                </span>
+              )}
+              <span class="absolute inset-x-0 bottom-0 bg-ink/90 p-4">
+                <p class="font-display text-base font-semibold leading-tight text-white">{c.titulo}</p>
+                <span class="mt-2 flex items-baseline gap-2">
+                  <span class="font-display text-lg text-white">{c.preco}</span>
+                  {c.parcela && <span class="text-[11px] text-white/60">{c.parcela}</span>}
+                </span>
               </span>
-            )}
-            <h3 class="font-semibold text-paper">{c.titulo}</h3>
-            <p class="mt-2 text-sm text-paper/60">{c.desc}</p>
-            <div class="mt-4 flex items-baseline gap-2">
-              <span class="font-display text-xl text-paper">{c.preco}</span>
-              {c.parcela && <span class="text-xs text-paper/50">{c.parcela}</span>}
-            </div>
+            </span>
           </a>
         ))}
       </div>
