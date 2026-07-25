@@ -13,6 +13,8 @@ export function getStaticPaths() {
 const { curso } = Astro.props;
 const outrosCursos = cursos.filter((c) => c.slug !== curso.slug);
 
+const heroYoutubeEmbed = `https://www.youtube-nocookie.com/embed/${curso.videoId}?autoplay=1&mute=1&loop=1&playlist=${curso.videoId}&controls=0&modestbranding=1&rel=0&showinfo=0&disablekb=1&playsinline=1&iv_load_policy=3&cc_load_policy=0&enablejsapi=1`;
+
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'Course',
@@ -33,72 +35,134 @@ const structuredData = {
   cursoAtualSlug={curso.slug}
   structuredData={structuredData}
 >
-  <main class="mx-auto flex w-full max-w-3xl flex-col items-center px-4 pb-20 pt-28 text-center sm:px-6 sm:pt-24">
-    {curso.badge && (
-      <span class="inline-block w-fit rounded-full bg-brand-red/20 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-brand-red">
-        {curso.badge}
-      </span>
-    )}
-    <h1 class="balance mt-4 font-hero text-3xl uppercase leading-snug text-paper sm:text-4xl">
-      {curso.titulo}
-    </h1>
-    <p class="mt-4 max-w-xl text-lg text-paper/70">
-      {curso.desc}
-    </p>
+  <main>
+  <section class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pb-16 pt-28 sm:px-6 sm:pt-36">
+    <div class="hero-yt-wrap" aria-hidden="true">
+      <iframe
+        id="hero-curso-video"
+        class="hero-yt-iframe"
+        src={heroYoutubeEmbed}
+        title=""
+        allow="autoplay; encrypted-media"
+        tabindex="-1"
+      ></iframe>
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/15 to-black"></div>
 
-    <div class="video-facade media-card group relative mt-10 aspect-video w-full cursor-pointer overflow-hidden rounded-2xl bg-ink-raised" data-youtube-id={curso.videoId} tabindex="0" role="button" aria-label={`Assistir ao vídeo de ${curso.titulo}`}>
-      <img
-        src={`https://img.youtube.com/vi/${curso.videoId}/maxresdefault.jpg`}
-        alt=""
-        class="absolute inset-0 h-full w-full object-cover opacity-60 transition group-hover:opacity-75"
-        loading="lazy"
-      />
-      <div class="absolute inset-0 bg-black/35"></div>
-      <div class="absolute inset-0 flex items-center justify-center">
-        <span class="video-play-btn flex h-16 w-16 items-center justify-center rounded-full bg-paper/95 shadow-xl ring-4 ring-black/20 sm:h-20 sm:w-20">
-          <svg viewBox="0 0 24 24" class="ml-1 h-7 w-7 fill-ink sm:h-8 sm:w-8"><path d="M8 5v14l11-7z"></path></svg>
+    <button
+      id="hero-curso-unmute"
+      type="button"
+      class="absolute right-4 top-24 z-10 flex items-center gap-2 rounded-full border border-paper/30 bg-ink/70 px-3 py-2 text-xs font-semibold text-paper backdrop-blur transition hover:border-paper/60 sm:right-6"
+      aria-pressed="false"
+    >
+      <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current"><path d="M3 10v4h4l5 5V5L7 10H3Zm13.5 2a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12Z"/></svg>
+      <span>Ativar som do vídeo</span>
+    </button>
+
+    <div class="relative mx-auto flex w-full max-w-2xl flex-col items-center text-center [text-shadow:0_1px_3px_rgba(0,0,0,0.85),0_2px_10px_rgba(0,0,0,0.5)]">
+      {curso.badge && (
+        <span class="inline-block w-fit rounded-full bg-brand-red px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
+          {curso.badge}
         </span>
+      )}
+      <h1 class="balance mt-3 font-hero text-5xl uppercase leading-[1.15] text-paper sm:text-6xl sm:leading-[1.15] md:text-7xl md:leading-[1.15]">
+        {curso.titulo}
+      </h1>
+      <p class="balance mt-[5px] max-w-md font-display text-base leading-snug tracking-wide text-paper">
+        {curso.desc}
+      </p>
+
+      <div class="mt-8 flex flex-col items-center gap-2">
+        <div class="flex items-baseline gap-2">
+          <span class="font-display text-3xl text-white">{curso.preco}</span>
+          {curso.parcela && <span class="text-sm text-white/60">{curso.parcela}</span>}
+        </div>
+        <a
+          href={curso.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-2 inline-flex items-center gap-2.5 rounded-full bg-brand-red px-8 py-4 font-accent text-lg uppercase tracking-wide text-white"
+        >
+          {curso.preco === 'Grátis' ? 'Assistir grátis' : 'Garantir minha vaga'}
+        </a>
       </div>
     </div>
+  </section>
 
-    <div class="mx-auto mt-10 w-full max-w-2xl px-4 sm:px-0">
+  <div class="flex flex-col items-center px-4 pb-16 sm:px-6">
+    <div class="mx-auto mt-16 w-full max-w-2xl px-4 sm:px-0">
       <article class="glow-card rounded-2xl bg-ink-raised p-6 text-left sm:p-8">
         <h2 class="font-hero text-xl text-paper">Sobre o curso</h2>
         <p class="mt-3 text-paper/70">{curso.descLonga}</p>
       </article>
     </div>
 
-    <div class="mx-auto mt-10 flex w-full max-w-2xl flex-col items-center gap-4 rounded-2xl bg-ink-raised p-6 sm:p-8">
-      <div class="flex items-baseline gap-2">
-        <span class="font-display text-3xl text-paper">{curso.preco}</span>
-        {curso.parcela && <span class="text-sm text-paper/50">{curso.parcela}</span>}
-      </div>
-      <a
-        href={curso.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="w-full max-w-xs rounded-full bg-brand-red px-6 py-3 text-center font-accent text-base text-paper transition hover:brightness-110 sm:w-auto"
-      >
-        {curso.preco === 'Grátis' ? 'Assistir grátis' : 'Garantir minha vaga'}
-      </a>
+    <div class="mx-auto mt-6 w-full max-w-2xl px-4 sm:px-0">
+      <article class="glow-card rounded-2xl bg-ink-raised p-6 text-left sm:p-8">
+        <h2 class="font-hero text-xl text-paper">O que você vai aprender</h2>
+        <ul class="mt-4 flex flex-col gap-3">
+          {curso.aprende.map((item) => (
+            <li class="flex items-start gap-3 text-sm text-paper/70">
+              <svg viewBox="0 0 24 24" class="mt-0.5 h-4 w-4 shrink-0 fill-brand-red"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
     </div>
+
+    {curso.faq && curso.faq.length > 0 && (
+      <div class="mx-auto mt-6 w-full max-w-2xl px-4 sm:px-0">
+        <article class="glow-card rounded-2xl bg-ink-raised p-6 text-left sm:p-8">
+          <h2 class="font-hero text-xl text-paper">Perguntas frequentes</h2>
+          <div class="mt-4 flex flex-col divide-y divide-ink-line">
+            {curso.faq.map((f) => (
+              <details class="group py-3">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold text-paper">
+                  {f.pergunta}
+                  <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 fill-current transition group-open:rotate-180"><path d="M7 10l5 5 5-5z"/></svg>
+                </summary>
+                <p class="mt-2 text-sm text-paper/60">{f.resposta}</p>
+              </details>
+            ))}
+          </div>
+        </article>
+      </div>
+    )}
 
     {outrosCursos.length > 0 && (
       <div class="mx-auto mt-16 w-full max-w-5xl px-4 sm:px-0">
         <h2 class="text-center font-hero text-2xl text-paper sm:text-3xl">Outros cursos da Academia</h2>
-        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {outrosCursos.map((c) => (
-            <a href={`/${c.slug}`} class="glow-card flex flex-col rounded-2xl bg-ink-raised p-5 text-left transition">
-              {c.badge && (
-                <span class="mb-2 inline-block w-fit rounded-full bg-brand-red/20 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-brand-red">
-                  {c.badge}
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          {outrosCursos.map((c, i) => (
+            <a
+              href={`/${c.slug}`}
+              class:list={[
+                'media-card group relative flex flex-col overflow-hidden bg-ink-raised',
+                i === outrosCursos.length - 1 && outrosCursos.length % 2 !== 0 && 'sm:col-span-2 sm:mx-auto sm:w-full sm:max-w-[calc(50%-0.5rem)]',
+              ]}
+            >
+              <span class="relative block aspect-video w-full overflow-hidden">
+                <img
+                  src={`https://img.youtube.com/vi/${c.videoId}/maxresdefault.jpg`}
+                  alt={`Capa do curso ${c.titulo}`}
+                  loading="lazy"
+                  class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                />
+                <span class="pointer-events-none absolute inset-0 bg-black/30" />
+                {c.badge && (
+                  <span class="absolute left-3 top-3 inline-block rounded-full bg-brand-red px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
+                    {c.badge}
+                  </span>
+                )}
+                <span class="absolute inset-x-0 bottom-0 bg-ink/90 p-4">
+                  <p class="font-display text-base font-semibold leading-tight text-white">{c.titulo}</p>
+                  <span class="mt-2 flex items-baseline gap-2">
+                    <span class="font-display text-lg text-white">{c.preco}</span>
+                    {c.parcela && <span class="text-[11px] text-white/60">{c.parcela}</span>}
+                  </span>
                 </span>
-              )}
-              <h3 class="font-semibold text-paper">{c.titulo}</h3>
-              <div class="mt-4 flex items-baseline gap-2">
-                <span class="font-display text-xl text-paper">{c.preco}</span>
-                {c.parcela && <span class="text-xs text-paper/50">{c.parcela}</span>}
-              </div>
+              </span>
             </a>
           ))}
         </div>
@@ -108,29 +172,24 @@ const structuredData = {
     <div class="mx-auto mt-20 w-full max-w-5xl px-4 sm:px-0">
       <RedeFooter atual="Academia Loops Brasil" />
     </div>
+  </div>
   </main>
 
   <script>
-    document.querySelectorAll<HTMLElement>('.video-facade').forEach((facade) => {
-      const play = () => {
-        const videoId = facade.dataset.youtubeId;
-        if (!videoId) return;
-        const iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
-        iframe.className = 'absolute inset-0 h-full w-full';
-        iframe.style.border = 'none';
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-        iframe.allowFullscreen = true;
-        facade.innerHTML = '';
-        facade.appendChild(iframe);
-      };
-      facade.addEventListener('click', play);
-      facade.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          play();
-        }
-      });
+    // botao "ativar som" manda comando pro iframe do YouTube via postMessage
+    // (API do player, sem precisar carregar o script oficial inteiro) -
+    // video comeca mudo (autoplay so funciona assim), pessoa que quiser
+    // realmente assistir/ouvir clica aqui
+    const unmuteBtn = document.getElementById('hero-curso-unmute');
+    const heroIframe = document.getElementById('hero-curso-video') as HTMLIFrameElement | null;
+    let unmuted = false;
+    unmuteBtn?.addEventListener('click', () => {
+      if (!heroIframe?.contentWindow) return;
+      unmuted = !unmuted;
+      const func = unmuted ? 'unMute' : 'mute';
+      heroIframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args: [] }), '*');
+      unmuteBtn.setAttribute('aria-pressed', String(unmuted));
+      unmuteBtn.querySelector('span')!.textContent = unmuted ? 'Silenciar vídeo' : 'Ativar som do vídeo';
     });
   </script>
 </Base>

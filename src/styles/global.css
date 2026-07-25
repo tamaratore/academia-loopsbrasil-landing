@@ -126,6 +126,30 @@
   display: block;
 }
 
+/* video de fundo do hero via YouTube (paginas de curso), mesma tecnica do
+   emmusicproducoes/eder/edtmusic */
+.hero-yt-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero-yt-iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw;
+  min-height: 100vh;
+  min-width: 177.78vh;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  filter: brightness(0.7) contrast(1.1) saturate(1.05);
+  border: none;
+  outline: none;
+  display: block;
+}
+
 /* cards de midia: sem borda, cantos quase retos, sombra leve parada + sombra
    mais forte e leve elevacao no hover */
 .media-card {
@@ -141,13 +165,4 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .media-card:hover { transform: none; }
-}
-
-/* facade de vídeo: thumbnail clicável que vira iframe do YouTube só quando
-   clicado, pra não carregar o player inteiro sem necessidade (performance/SEO) */
-.video-play-btn {
-  transition: transform 0.2s ease;
-}
-.video-facade:hover .video-play-btn {
-  transform: scale(1.08);
 }
