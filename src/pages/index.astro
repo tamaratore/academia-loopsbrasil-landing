@@ -64,11 +64,14 @@ const heroVimeoEmbed = `https://player.vimeo.com/video/${HERO_VIMEO_ID}?backgrou
         na Academia Loops Brasil.
       </p>
 
-      <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {cursos.map((c) => (
+      <div class="mt-10 grid gap-4 sm:grid-cols-2">
+        {cursos.map((c, i) => (
           <a
             href={`/${c.slug}`}
-            class="media-card group relative flex flex-col overflow-hidden bg-ink-raised"
+            class:list={[
+              'media-card group relative flex flex-col overflow-hidden bg-ink-raised',
+              i === cursos.length - 1 && cursos.length % 2 !== 0 && 'sm:col-span-2 sm:mx-auto sm:w-full sm:max-w-[calc(50%-0.5rem)]',
+            ]}
           >
             <span class="relative block aspect-video w-full overflow-hidden">
               <img
