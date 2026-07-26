@@ -90,7 +90,7 @@ export const cursos: Curso[] = [
   },
   {
     slug: 'kontakt-6',
-    titulo: 'Contakt Prático 6',
+    titulo: 'Kontakt Prático 6',
     desc: 'Aprenda a usar o Kontakt 6 na prática. Do básico ao avançado, aplicado direto na produção musical.',
     descLonga:
       'Curso prático do Kontakt 6, sem enrolação. Do básico ao avançado, cada aula já aplica o conteúdo direto numa produção musical real, pra você sair sabendo usar a ferramenta no dia a dia, não só na teoria.',
