@@ -143,7 +143,7 @@ export const cursos: Curso[] = [
     preco: 'R$197',
     parcela: 'ou 12x de R$20,37',
     href: 'https://edtutoriais.com.br/curso-guias/',
-    videoId: 'WDNl1jkKW0M',
+    videoId: 'f3G5jxfZce8',
   },
   {
     slug: 'curso-loops',
