@@ -23,6 +23,7 @@ export interface Curso {
   href: string;
   badge?: string;
   videoId: string;
+  videoIdFundo?: string;
 }
 
 export const cursos: Curso[] = [
@@ -143,7 +144,8 @@ export const cursos: Curso[] = [
     preco: 'R$197',
     parcela: 'ou 12x de R$20,37',
     href: 'https://edtutoriais.com.br/curso-guias/',
-    videoId: 'f3G5jxfZce8',
+    videoId: 'WDNl1jkKW0M',
+    videoIdFundo: 'f3G5jxfZce8',
   },
   {
     slug: 'curso-loops',

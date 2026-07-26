@@ -13,7 +13,8 @@ export function getStaticPaths() {
 const { curso } = Astro.props;
 const outrosCursos = cursos.filter((c) => c.slug !== curso.slug);
 
-const heroYoutubeEmbed = `https://www.youtube-nocookie.com/embed/${curso.videoId}?autoplay=1&mute=1&loop=1&playlist=${curso.videoId}&controls=0&modestbranding=1&rel=0&showinfo=0&disablekb=1&playsinline=1&iv_load_policy=3&cc_load_policy=0&enablejsapi=1`;
+const videoFundoId = curso.videoIdFundo || curso.videoId;
+const heroYoutubeEmbed = `https://www.youtube-nocookie.com/embed/${videoFundoId}?autoplay=1&mute=1&loop=1&playlist=${videoFundoId}&controls=0&modestbranding=1&rel=0&showinfo=0&disablekb=1&playsinline=1&iv_load_policy=3&cc_load_policy=0&enablejsapi=1`;
 
 const structuredData = {
   '@context': 'https://schema.org',
