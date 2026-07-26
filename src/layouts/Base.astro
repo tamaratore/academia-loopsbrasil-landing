@@ -19,8 +19,9 @@ interface Props {
   redeAtual?: string;
   academiaMode?: boolean;
   cursoAtualSlug?: string;
+  cursoTitulo?: string;
 }
-const { title, description, image, structuredData, redeAtual, academiaMode, cursoAtualSlug } = Astro.props;
+const { title, description, image, structuredData, redeAtual, academiaMode, cursoAtualSlug, cursoTitulo } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = image ? new URL(image, Astro.site).toString() : undefined;
 ---
@@ -73,7 +74,7 @@ const ogImage = image ? new URL(image, Astro.site).toString() : undefined;
     )}
   </head>
   <body class="bg-black text-paper font-body antialiased">
-    <Preloader />
+    <Preloader cursoTitulo={cursoTitulo} />
     <div id="site-nav-wrap" class="nav-overlay-gradient fixed inset-x-0 top-0 z-50">
       {academiaMode ? (
         <CourseNav cursoAtualSlug={cursoAtualSlug} />
