@@ -150,6 +150,18 @@
   display: block;
 }
 
+/* seta que indica pra rolar pra proxima secao, mesmo padrao do edtmusic/emmusicproducoes */
+.scroll-hint {
+  animation: scroll-hint-bounce 1.8s ease-in-out infinite;
+}
+@keyframes scroll-hint-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-hint { animation: none; }
+}
+
 /* cards de midia: sem borda, cantos quase retos, sombra leve parada + sombra
    mais forte e leve elevacao no hover */
 .media-card {
