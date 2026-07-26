@@ -60,17 +60,24 @@ const structuredData = {
     </button>
 
     <div class="relative mx-auto flex w-full max-w-2xl flex-col items-center text-center [text-shadow:0_1px_3px_rgba(0,0,0,0.85),0_2px_10px_rgba(0,0,0,0.5)]">
-      <div class="mb-2 w-full max-w-xl overflow-hidden rounded-2xl shadow-2xl">
-        <div class="aspect-video w-full">
-          <iframe
-            class="h-full w-full"
-            src={`https://www.youtube-nocookie.com/embed/${curso.videoId}?modestbranding=1&rel=0`}
-            title={curso.titulo}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
-      </div>
+      <button
+        type="button"
+        class="video-facade-curso group relative mb-2 block aspect-video w-full max-w-xl overflow-hidden rounded-2xl shadow-2xl"
+        data-video-id={curso.videoId}
+        aria-label={`Assistir vídeo de ${curso.titulo}`}
+      >
+        <img
+          src={`https://img.youtube.com/vi/${curso.videoId}/maxresdefault.jpg`}
+          alt={`Vídeo de ${curso.titulo}`}
+          class="h-full w-full object-cover"
+          loading="eager"
+        />
+        <span class="absolute inset-0 flex items-center justify-center bg-black/25 transition group-hover:bg-black/35">
+          <span class="video-play-btn flex h-16 w-16 items-center justify-center rounded-full bg-brand-red shadow-lg">
+            <svg viewBox="0 0 24 24" class="ml-1 h-7 w-7 fill-white"><path d="M8 5v14l11-7Z"/></svg>
+          </span>
+        </span>
+      </button>
       {curso.badge && (
         <span class="inline-block w-fit rounded-full bg-brand-red px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
           {curso.badge}
@@ -111,7 +118,7 @@ const structuredData = {
   </section>
 
   <div class="flex flex-col items-center px-4 pb-16 sm:px-6">
-    <div id="sobre" class="mx-auto mt-16 w-full max-w-2xl px-4 sm:px-0">
+    <div id="sobre" class="mx-auto mt-16 w-full max-w-2xl scroll-mt-28 px-4 sm:scroll-mt-36 sm:px-0">
       <article class="glow-card rounded-2xl bg-ink-raised p-6 text-left sm:p-8">
         <h2 class="font-hero text-xl text-paper">Sobre o curso</h2>
         <p class="mt-3 text-paper/70">{curso.descLonga}</p>
@@ -211,6 +218,23 @@ const structuredData = {
       heroIframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args: [] }), '*');
       unmuteBtn.setAttribute('aria-pressed', String(unmuted));
       unmuteBtn.querySelector('span')!.textContent = unmuted ? 'Silenciar vídeo' : 'Ativar som do vídeo';
+    });
+
+    // video de verdade pra assistir: so carrega o iframe do YouTube quando
+    // clica na miniatura (poster em alta resolucao, controlado por nos)
+    document.querySelectorAll<HTMLElement>('.video-facade-curso').forEach((facade) => {
+      facade.addEventListener('click', () => {
+        const videoId = facade.dataset.videoId;
+        if (!videoId) return;
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&modestbranding=1&rel=0`;
+        iframe.className = 'absolute inset-0 h-full w-full';
+        iframe.style.border = 'none';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.allowFullscreen = true;
+        facade.innerHTML = '';
+        facade.appendChild(iframe);
+      });
     });
   </script>
 </Base>
