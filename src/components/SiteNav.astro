@@ -6,12 +6,14 @@
 // Logo em imagem tentada 24/07, mas o arquivo fonte tinha defeitos reais
 // dificeis de corrigir - Tore pediu pra voltar a ser so texto "ALB" na
 // fonte do mesmo estilo (font-hero/Anton, igual o resto da marca).
-// "Sobre" ja existe na barra de cima (RedeSwitcher, link externo pra Nossa
-// Historia da rede) - usar outro nome aqui pra nao ter 2 "Sobre" diferentes
-// (um ancora local, outro link externo) empilhados um do lado do outro.
+// 26/07: Toré pediu link direto pro "Sobre" (historia da rede) e pra "Rede
+// Loops Brasil" (hub) tambem aqui na barra de baixo, alem do que ja existe
+// na barra de cima (RedeSwitcher/"Conhecer a rede").
 const LINKS = [
   { href: '#topo', label: 'Início' },
   { href: '#cursos', label: 'Cursos' },
+  { href: 'https://rede.loopsbrasil.com.br/nossa-historia', label: 'Sobre' },
+  { href: 'https://rede.loopsbrasil.com.br', label: 'Rede Loops Brasil' },
 ];
 ---
 <div id="site-nav" class="hidden sm:block">
